@@ -27,7 +27,27 @@ const updateUserValidation = [
 
 ];
 
+const updateUserEmailValidation = [
+  check('user_email')
+    .isEmail().withMessage('Invalid Email Format')
+];
+
+const changeUserPasswordValidation = [
+  check('old_password').notEmpty().withMessage('Old password is required'),
+  check('new_password')
+    .notEmpty().withMessage('New password is required')
+    .isLength({ min: 8 }).withMessage('New password must be at least 8 characters long')
+    .isStrongPassword().withMessage('New password is weak, try adding numbers and special characters'),
+];
+
+const updateUserBioValidation = [
+  check('bio').optional().isString().withMessage('Bio must be a string').isLength({ max: 250 }).withMessage('Bio cannot exceed 250 characters'),
+];
+
 module.exports = {
   insertUserValidation,
   updateUserValidation,
+  updateUserEmailValidation,
+  changeUserPasswordValidation,
+  updateUserBioValidation
 };

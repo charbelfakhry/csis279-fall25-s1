@@ -13,6 +13,10 @@ const {
     searchForProductsController
 } = require('../controllers/productsController');
 
+const {
+    insertProductValidation,
+    updateprodcutValidation
+} = require('../Validators/products-validator');
 
 // GET ROUTES
 router.get('/products', getAllProductsController);
@@ -23,10 +27,12 @@ router.get('/products/top-rated', getProductsBasedOnReviews);
 router.get('/products/search', searchForProductsController);
 
 
-router.post('/product', createNewProductController);
+router.post('/product', createNewProductController,
+    insertProductValidation());
 
 // PUT ROUTES
-router.put('/product/:id', updateProductController);
+router.put('/product/:id', updateProductController,
+    updateprodcutValidation());
 
 // DELETE ROUTES
 router.delete('/product/:id', deleteProductControlelr); 

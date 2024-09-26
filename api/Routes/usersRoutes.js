@@ -20,6 +20,14 @@ const {
   generateEmailConfirmationTokenController,
 } = require("../controllers/usersController");
 
+const {
+  insertUserValidation,
+  updateUserValidation,
+  updateUserEmailValidation,
+  changeUserPasswordValidation,
+  updateUserBioValidation
+} = require('../Validators/users-validator');
+
 //GET ROUTES
 
 router.get("/user/:id", authToken, getUserByIdController);
@@ -28,7 +36,7 @@ router.get("/user/search/email", searchUserByEmailController);
 router.get("/user/search/username", searchUserByUsernameController);
 
 //POST ROUTES
-router.post("/user", registerUserController);
+router.post("/user", registerUserController, insertUserValidation());
 router.post("/auth/login", authenticateUserController);
 router.post("/auth/refresh-token", refreshTokenController);
 router.post("/user/reset-password", resetPasswordController);
@@ -39,10 +47,14 @@ router.post(
 router.post("/user/confirm-email", confirmEmailController);
 
 //PUT ROUTES
-router.put("/user/:id", authToken, updateUserController);
-router.put("/user/changeEmail/:id", updateUserEmailController);
-router.put("/user/bio/:id", updateUserBioController);
-router.put("/user/change-password/:id", changeUserPasswordController);
+router.put("/user/:id", authToken, updateUserController,
+  updateUserValidation());
+router.put("/user/changeEmail/:id", updateUserEmailController,
+  updateUserEmailValidation());
+router.put("/user/bio/:id", updateUserBioController,
+  updateUserBioValidation());
+router.put("/user/change-password/:id", changeUserPasswordController,
+  changeUserPasswordValidation());
 
 //DELTE ROUTES
 router.delete("/user/:id", authToken, deleteUserController);
