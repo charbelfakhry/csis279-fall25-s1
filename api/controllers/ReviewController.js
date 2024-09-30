@@ -6,7 +6,9 @@ const reviewController = {
       const { review_id, review_body } = req.body;
 
       if (!review_id || !review_body) {
-        return res.status(400).json({ message: 'Review ID and review body are required' });
+        return res
+          .status(400)
+          .json({ message: "Review ID and review body are required" });
       }
 
       const review = await reviewService.addReview(review_id, review_body);
@@ -30,7 +32,7 @@ const reviewController = {
       const { reviewId } = req.params;
       const review = await reviewService.getReviewById(reviewId);
       if (!review) {
-        return res.status(404).json({ message: 'Review not found' });
+        return res.status(404).json({ message: "Review not found" });
       }
       res.status(200).json(review);
     } catch (error) {
@@ -44,14 +46,14 @@ const reviewController = {
       const deleted = await reviewService.deleteReview(reviewId);
 
       if (!deleted) {
-        return res.status(404).json({ message: 'Review not found' });
+        return res.status(404).json({ message: "Review not found" });
       }
 
-      res.status(200).json({ message: 'Review deleted successfully' });
+      res.status(200).json({ message: "Review deleted successfully" });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
-  }
+  },
 };
 
 module.exports = reviewController;
