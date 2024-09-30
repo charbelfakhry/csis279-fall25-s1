@@ -1,23 +1,51 @@
-const { Cart_Items } = require('../models/Cart_Items'); 
+const { cartItems } = require('../models/cartItems'); // Model cartItems is missing
 
 // Get all CartItems
 const getCartItems = async () => {
-    return await Cart_Items.findAll();
+    try {
+        return await cartItems.findAll();
+    } catch (error) {
+        console.error(`Error in fetching for cart items`);
+        throw error;
+    }
 };
 
-// Get an Cart_Items by ID
-const getCartItemsById = async (Cart_Items_id) => {
-    return await Cart_Items.findByPk(Cart_Items_id);
+// Get an cartItems by ID
+const getCartItemsById = async (cartItems_id) => {
+    try {
+        const cartItem = await cartItems.findByPk(cartItems_id);
+        if (!cartItem) {
+            throw new Error(`cart items with the id ${cartItems_id} are not found`);
+        }
+        return await cartItems.findByPk(cartItems_id);
+    } catch (error) {
+        console.error(`Error in finding cart Items with the cartItem id ${cartItems_id}`, error);
+        throw error;
+    }
 };
 
-// Add an Cart_Items
-const addCartItems = async (Cart_Items_id, Cart_Items_date ) => {
-    return await Cart_Items.create({ Cart_Items_id: Cart_Items_id, Cart_Items_date: Cart_Items_date });
+// Add an cartItems
+const addCartItems = async (cartItems_id, cartItems_date) => {
+    try {
+        return await cartItems.create({ cartItems_id: cartItems_id, cartItems_date: cartItems_date });
+    } catch (error) {
+        console.error(`error in adding a new cart item`, error);
+        throw error;
+    }
 };
 
-// Delete an Cart_Items
-const deleteCartItems = async (Cart_Items_id) => {
-    return await Cart_Items.destroy({ where: { CartItems_id: Cart_Items_id } });
+// Delete an cartItems
+const deleteCartItems = async (cartItems_id) => {
+    try {
+        const deltedCartItem = await cartItems.destroy({ where: { cartItems_id: cartItems_id } });
+        if (!deltedCartItem) {
+            throw new Error(`No cart item found to delete with the id ${cartItems}`, error);
+
+        }
+    } catch (error) {
+        console.error(`Error in deleting the cart item with the id ${cartItems_id}`, error);
+        throw error;
+    }
 };
 
 

@@ -1,30 +1,56 @@
-const { Reviews } = require('../models/Reviews'); 
+const { Review } = require('../models/review');
 
-// Get all Reviewss
-const getReviewss = async () => {
-    return await Reviews.findAll();
+// Get all Reviews
+const getReviews = async () => {
+  try {
+    return await Review.findAll();
+  } catch (error) {
+    console.error("Error fetching all reviews:", error);
+    throw error;
+  }
 };
 
-// Get an Reviews by ID
-const getReviewsById = async (review_id) => {
-    return await Reviews.findByPk(review_id);
+// Get a Review by ID
+const getReviewById = async (review_id) => {
+  try {
+    const review = await Review.findByPk(review_id);
+    if (!review) {
+      throw new Error(`Review with ID ${review_id} not found`);
+    }
+    return review;
+  } catch (error) {
+    console.error(`Error fetching review with ID ${review_id}:`, error);
+    throw error;
+  }
 };
 
-// Add an Reviews
-const addReviews = async (review_id, review_body) => {
-    return await Reviews.create({ review_id: review_id, review_body: review_body });
+// Add a Review
+const addReview = async (review_id, review_body) => {
+  try {
+    return await Review.create({ review_id: review_id, review_body: review_body });
+  } catch (error) {
+    console.error("Error adding new review:", error);
+    throw error;
+  }
 };
 
-// Delete an Reviews
-const deleteReviews = async (review_id) => {
-    return await Reviews.destroy({ where: { review_id: review_id } });
+// Delete a Review
+const deleteReview = async (review_id) => {
+  try {
+    const deleted = await Review.destroy({ where: { review_id: review_id } });
+    if (!deleted) {
+      throw new Error(`Review with ID ${review_id} not found`);
+    }
+    return deleted;
+  } catch (error) {
+    console.error(`Error deleting review with ID ${review_id}:`, error);
+    throw error;
+  }
 };
-
 
 module.exports = {
-    getReviewss,
-    getReviewsById,
-    addReviews,
-    deleteReviews,
-   
+  getReviews,
+  getReviewById,
+  addReview,
+  deleteReview,
 };
