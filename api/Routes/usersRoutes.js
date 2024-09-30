@@ -3,21 +3,21 @@ const router = express.Router();
 const authToken = require("../middleware/auth");
 
 const {
-  registerUserController,
   getUserByIdController,
-  findAllUsersController,
+  getAllUsersController,
+  createUserController,
   updateUserController,
   deleteUserController,
-  updateUserEmailController,
-  authenticateUserController,
-  refreshTokenController,
-  updateUserBioController,
-  changeUserPasswordController,
-  resetPasswordController,
-  confirmEmailController,
-  searchUserByEmailController,
-  searchUserByUsernameController,
-  generateEmailConfirmationTokenController,
+  updateUserEmailController,//needs adding 
+  authenticateUserController,//needs adding 
+  refreshTokenController,//needs adding 
+  updateUserBioController,//needs adding 
+  changeUserPasswordController,//needs adding 
+  resetPasswordController,//needs adding 
+  confirmEmailController,//needs adding 
+  searchUserByEmailController,//needs adding 
+  searchUserByUsernameController,//needs adding 
+  generateEmailConfirmationTokenController,//needs adding 
 } = require("../controllers/userController");
 
 const {
@@ -31,12 +31,12 @@ const {
 //GET ROUTES
 
 router.get("/user/:id", authToken, getUserByIdController);
-router.get("/users", authToken, findAllUsersController);
+router.get("/users", authToken, getAllUsersController);
 router.get("/user/search/email", searchUserByEmailController);
 router.get("/user/search/username", searchUserByUsernameController);
 
 //POST ROUTES
-router.post("/user", registerUserController, insertUserValidation());
+router.post("/user", createUserController, insertUserValidation());
 router.post("/auth/login", authenticateUserController);
 router.post("/auth/refresh-token", refreshTokenController);
 router.post("/user/reset-password", resetPasswordController);
