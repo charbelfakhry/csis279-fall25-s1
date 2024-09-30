@@ -18,7 +18,7 @@ const {
   searchUserByEmailController,
   searchUserByUsernameController,
   generateEmailConfirmationTokenController,
-} = require("../controllers/usersController");
+} = require("../controllers/userController");
 
 const {
   insertUserValidation,

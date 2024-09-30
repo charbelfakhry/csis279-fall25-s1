@@ -39,7 +39,7 @@ const orderItemController = {
   },
 
   getOrderItemById: async (req, res) => {
-    x;
+    
     try {
       const { orderItemId } = req.params;
       const orderItem = await orderItemService.getOrderItemById(orderItemId);
