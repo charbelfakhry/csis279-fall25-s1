@@ -15,7 +15,7 @@ const authenticateUserController = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "invalid email or pass" });
     }
-    const validPass = await bcrypt.compare(pass, user.pass);//salted pass
+    const validPass = await bcrypt.compare(pass, user.user_pass);//salted pass
     if (!validPass) {
       return res.status(404).json({ message: "invalid email or pass" });
     }
