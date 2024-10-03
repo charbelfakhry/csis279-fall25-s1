@@ -24,6 +24,22 @@ const getCartItemsById = async (cartItems_id) => {
     }
 };
 
+
+//needs testing wrote this fast
+// Get an cartItems by User ID
+const getCartItemsByUserId = async (cartItems_user_id) => {
+    try {
+        const cartItems = await cartItems.findAll({ where: { cartItems_user_id: cartItems_user_id } });
+        if (!cartItems) {
+            throw new Error(`cart items with the user id ${cartItems_user_id} are not found`);
+        }
+        return cartItems;
+    } catch (error) {
+        console.error(`Error in finding cart Items with the user id ${cartItems_user_id}`, error);
+        throw error;
+    }
+};
+
 // Add an cartItems
 const addCartItems = async (cartItems_id, cartItems_date) => {
     try {

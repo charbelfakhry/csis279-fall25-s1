@@ -2,28 +2,28 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  getAllCartItemsController,
-  getCartItemByIdController,
-  addProductToCartController,
+  getCartItems,
+  getCartItemsById,
+  addCartItems,
   updateCartItemController,
-  removeCartItemController,
-  getCartItemsByUserIdController,
+  deleteCartItems,
+  getCartItemsByUserId,
   clearUserCartController,
 } = require("../controllers/CartItemController");
 
 // GET ROUTES
-router.get("/cart-items", getAllCartItemsController);
-router.get("/cart-items/:id", getCartItemByIdController);
-router.get("/cart-items/user/:userId", getCartItemsByUserIdController);
+router.get("/cart-items", getCartItems);
+router.get("/cart-items/:id", getCartItemsById);
+router.get("/cart-items/user/:userId", getCartItemsByUserId);
 
 // POST ROUTES
-router.post("/cart-items", addProductToCartController);
+router.post("/cart-items", addCartItems);
 
 // PUT ROUTES
 router.put("/cart-items/:id", updateCartItemController);
 
 // DELETE ROUTES
-router.delete("/cart-items/:id", removeCartItemController);
+router.delete("/cart-items/:id", deleteCartItems);
 router.delete("/cart-items/clear", clearUserCartController);
 
 module.exports = router;
