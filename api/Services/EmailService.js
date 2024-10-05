@@ -57,11 +57,7 @@
  * by wrapping the method calls in try-catch blocks or using promise chaining.
  */
 
-
-//TODO fix outlook seeing as junk
-//TODO test extensively (CC Attachment HTML)
-//TODO add rebecca's validators
-
+//TODO replace logging with errors
 
 const nodemailer = require('nodemailer');
 
@@ -96,7 +92,7 @@ class EmailService {
      * @param {string} [email.html] - Optional HTML body for the email.
      * @returns {Promise<void>} - Returns a promise that resolves when the email is sent.
      */
-    sendSingle = async ({ to, subject, body, attachments = [], cc = [], html }) => {
+    SendSingle = async ({ to, subject, body, attachments = [], cc = [], html }) => {
         const mailOptions = {
             from: this.from,
             to,
@@ -126,7 +122,7 @@ class EmailService {
      * @param {string} [email.html] - Optional HTML body for the email.
      * @returns {Promise<void>} - Returns a promise that resolves when all emails are sent.
      */
-    sendBulk = async ({ tos, subject, body, attachments = [], cc = [], html }) => {
+    SendBulk = async ({ tos, subject, body, attachments = [], cc = [], html }) => {
         const mailOptionsList = tos.map(to => ({
             from: this.from,
             to,
