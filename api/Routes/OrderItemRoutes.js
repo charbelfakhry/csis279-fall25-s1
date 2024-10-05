@@ -7,12 +7,12 @@ const {
   createNewOrderItemController,
   updateOrderItemController,
   deleteOrderItemController,
-} = require("../controllers/Order_ItemsController");
+} = require("../Controllers/OrderItemsController");
 
 const {
   insertOrderItemValidation,
   updateOrderItemValidation,
-} = require("../Validators/order_items-validator");
+} = require("../Validators/OrderItemValidator");
 
 // GET ROUTES
 router.get("/order-items", getAllOrderItemsController);

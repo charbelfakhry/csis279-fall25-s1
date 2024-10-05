@@ -1,4 +1,4 @@
-const { Review } = require('../models/review');
+const { Review } = require('../Models/Review');
 
 // Get all Reviews
 const getReviews = async () => {

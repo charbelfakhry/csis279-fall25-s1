@@ -1,4 +1,4 @@
-const Stripe = require('stripe');
+const Stripe = require('Stripe');
 const CustomerService = require('./customerService');
 const PaymentService = require('./paymentService');
 

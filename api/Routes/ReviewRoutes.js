@@ -9,12 +9,12 @@ const {
   deleteReviewController,
   getReviewsByProductIdController,
   getReviewsByUserIdController,
-} = require("../controllers/ReviewController");
+} = require("../Controllers/ReviewController");
 
 const {
   insertReviewValidation,
   updateReviewValidation,
-} = require("../Validators/reviews-validator");
+} = require("../Validators/ReviewValidator");
 // GET ROUTES
 router.get("/reviews", getAllReviewsController);
 router.get("/reviews/:id", getReviewByIdController);

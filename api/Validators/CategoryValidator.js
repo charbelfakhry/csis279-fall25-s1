@@ -1,4 +1,5 @@
 const { check } = require('express-validator');
+
 const CategoryValidation = [
     check('category_name').notEmpty().withMessage('Category Name is required'),
 ]

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const authToken = require("../middleware/auth");
+const authToken = require("../Middleware/AuthToken");
 
 const authenticateUserController
-  = require('../controllers/authenticateUserController');
+  = require('../Controllers/UserAuthController');
 
 const {
   getUserByIdController,
@@ -20,7 +20,7 @@ const {
   // searchUserByEmailController,//needs adding 
   // searchUserByUsernameController,//needs adding 
   // generateEmailConfirmationTokenController,//needs adding 
-} = require("../controllers/usersController");
+} = require("../Controllers/UsersController");
 
 const {
   insertUserValidation,
@@ -28,7 +28,7 @@ const {
   updateUserEmailValidation,
   changeUserPasswordValidation,
   updateUserBioValidation
-} = require('../Validators/users-validator');
+} = require('../Validators/UserValidator');
 
 //GET ROUTES
 

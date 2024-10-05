@@ -10,9 +10,9 @@ const {
   getOrderItemsController,
   addOrderItemController,
   getOrdersByUserIdController,
-} = require("../controllers/OrdersController");
+} = require("../Controllers/OrdersController");
 
-const { orderValidation } = require("../Validators/orders-validator");
+const { orderValidation } = require("../Validators/OrderValidator");
 
 // GET ROUTES
 router.get("/orders", getAllOrdersController);

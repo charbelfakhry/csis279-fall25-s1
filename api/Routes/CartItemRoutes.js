@@ -9,7 +9,7 @@ const {
   deleteCartItems,
   getCartItemsByUserId,
   clearUserCartController,
-} = require("../controllers/CartItemController");
+} = require("../Controllers/CartItemController");
 
 // GET ROUTES
 router.get("/cart-items", getCartItems);

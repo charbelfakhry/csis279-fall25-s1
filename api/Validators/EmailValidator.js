@@ -6,7 +6,7 @@
  * method the check if email is valid
  * return true if valid, false otherwise
  */
-const isEmailFormValid = (email) =>{
+const IsEmailFormValid = (email) =>{
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 };
@@ -15,7 +15,7 @@ const isEmailFormValid = (email) =>{
  * check if the domain can accept emails 
  * return trye if the domain has MX records, false otherwise
  */
-const emailDomainValid = (email) => {
+const EmailDomainValid = (email) => {
     // Extract domain from email address
     const domain = email.split('@')[1]; 
     return new Promise((resolve, reject) =>{
@@ -35,14 +35,14 @@ const emailDomainValid = (email) => {
      */
     const validateEmail = async(email) => {
 
-        if(isEmailFormatValid(email)){
+        if(IsEmailFormValid(email)){
             return{
                 isValid: false, message: 'invalid email format.'
             };
         }
 
         try {
-            const isDomainValid = await isEmailDomainValid(email);
+            const isDomainValid = await EmailDomainValid(email);
             if (isDomainValid) {
                 return { isValid: true, message: 'Valid email.' };
             } else {
@@ -53,5 +53,7 @@ const emailDomainValid = (email) => {
                 };
         }
     };
+
+    modules.exports = {validateEmail}
 
     

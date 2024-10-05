@@ -11,12 +11,12 @@ const {
   getProductReviewsController,
   getProductsBasedOnReviews,
   searchForProductsController,
-} = require("../controllers/ProductController");
+} = require("../Controllers/ProductController");
 
 const {
   insertProductValidation,
   updateprodcutValidation,
-} = require("../Validators/products-validator");
+} = require("../Validators/ProductValidator");
 
 // GET ROUTES
 router.get("/products", getAllProductsController);

@@ -1,4 +1,4 @@
-const { cartItems } = require('../models/cartItems'); // Model cartItems is missing
+const { cartItems } = require('../Models/cartItems'); // Model cartItems is missing
 
 // Get all CartItems
 const getCartItems = async () => {

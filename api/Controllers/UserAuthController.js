@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models/users");
+const User = require("../Models/User");
 require("dotenv").config();
 
-const authenticateUserController = async (req, res) => {
+const userAuthController = async (req, res) => {
   const { email, pass } = req.body;
 
   if(!email || !pass) {
@@ -31,4 +31,4 @@ const authenticateUserController = async (req, res) => {
   }
 };
 
-module.exports = authenticateUserController;
+module.exports = userAuthController;

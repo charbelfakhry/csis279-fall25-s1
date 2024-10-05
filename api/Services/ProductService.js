@@ -1,4 +1,4 @@
-import Product from "../models/products";
+import Product from "../Models/Product";
 
 const createProduct = async (name, price, quantity, categoryId) => {
     try {
