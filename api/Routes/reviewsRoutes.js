@@ -1,31 +1,33 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const {
-    getAllReviewsController,
-    getReviewByIdController,
-    createNewReviewController,
-    updateReviewController,
-    deleteReviewController,
-    getReviewsByProductIdController,
-    getReviewsByUserIdController
-} = require('../controllers/reviewsController');
+  getAllReviewsController,
+  getReviewByIdController,
+  createNewReviewController,
+  updateReviewController,
+  deleteReviewController,
+  getReviewsByProductIdController,
+  getReviewsByUserIdController,
+} = require("../controllers/ReviewController");
 
-const { insertReviewValidation,
-    updateReviewValidation} = require('../Validators/reviews-validator');
+const {
+  insertReviewValidation,
+  updateReviewValidation,
+} = require("../Validators/reviews-validator");
 // GET ROUTES
-router.get('/reviews', getAllReviewsController);
-router.get('/reviews/:id', getReviewByIdController);
-router.get('/reviews/product/:productId', getReviewsByProductIdController);
-router.get('/reviews/user/:userId', getReviewsByUserIdController);
+router.get("/reviews", getAllReviewsController);
+router.get("/reviews/:id", getReviewByIdController);
+router.get("/reviews/product/:productId", getReviewsByProductIdController);
+router.get("/reviews/user/:userId", getReviewsByUserIdController);
 
 // POST ROUTES
-router.post('/reviews', createNewReviewController , insertReviewValidation());
+router.post("/reviews", createNewReviewController, insertReviewValidation());
 
 // PUT ROUTES
-router.put('/reviews/:id', updateReviewController, updateReviewValidation());
+router.put("/reviews/:id", updateReviewController, updateReviewValidation());
 
 // DELETE ROUTES
-router.delete('/reviews/:id', deleteReviewController);
+router.delete("/reviews/:id", deleteReviewController);
 
 module.exports = router;

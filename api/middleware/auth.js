@@ -6,7 +6,7 @@ const authenicateToken = (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1];
 
   if (token == null) {
-    return res.sendStatus(401).json({ message: "Token not found" });
+    return res.status(401).json({ message: "Token not found" });
   }
 
   try {
@@ -15,7 +15,7 @@ const authenicateToken = (req, res, next) => {
     next();
   } catch (err) {
     console.error("Error verifying token", err);
-    res.sendStatus(403).json({ message: "invalid token" });
+    res.status(403).json({ message: "invalid token" });
   }
 };
 
