@@ -32,8 +32,8 @@ const {
 
 //GET ROUTES
 
-router.get("/user/:id", authToken, getUserByIdController); // Tested
-router.get("/users", authToken, getAllUsersController); // Tested
+router.get("/user/:id", getUserByIdController); // Tested
+router.get("/users", getAllUsersController); // Tested
 // router.get("/user/search/email", searchUserByEmailController);
 // router.get("/user/search/username", searchUserByUsernameController);
 

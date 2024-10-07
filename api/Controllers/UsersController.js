@@ -9,7 +9,8 @@ const {
 
 const usersController = {
   getUserByIdController: async (req, res) => {
-    const { user_id } = req.body;
+    const  user_id  = req.params.id;
+    console.log(req.params.id);
     try {
       if (!user_id) return res.status(400).json({ message: "Missing user id" });
 
