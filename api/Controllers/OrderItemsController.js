@@ -1,4 +1,4 @@
-const orderItemService = require("../services/orderItemsService");
+const orderItemService = require("../Services/OrderItemService");
 
 const orderItemController = {
   createOrderItem: async (req, res) => {

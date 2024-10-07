@@ -1,4 +1,4 @@
-const cartItemService = require("../services/cartItemsService"); // Import the cart item service.
+const cartItemService = require("../Services/CartItemService"); // Import the cart item service.
 
 const cartItemController = {
   createCartItem: async (req, res) => {

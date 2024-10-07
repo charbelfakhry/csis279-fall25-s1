@@ -5,7 +5,7 @@ const {
   updateUser,
   deleteUser,
   getUserByEmail,
-} = require("../services/UsersService");
+} = require("../Services/UserService");
 
 const usersController = {
   getUserByIdController: async (req, res) => {
