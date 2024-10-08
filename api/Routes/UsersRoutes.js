@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authToken = require("../Middleware/AuthToken");
 
-const authenticateUserController
-  = require('../Controllers/UserAuthController');
+const authenticateUserController = require("../Controllers/UserAuthController");
 
 const {
   getUserByIdController,
@@ -11,15 +10,15 @@ const {
   createUserController,
   updateUserController,
   deleteUserController,
-  // updateUserEmailController,//needs adding 
-  // refreshTokenController,//needs adding 
-  // updateUserBioController,//needs adding 
-  // changeUserPasswordController,//needs adding 
-  // resetPasswordController,//needs adding 
-  // confirmEmailController,//needs adding 
-  // searchUserByEmailController,//needs adding 
-  // searchUserByUsernameController,//needs adding 
-  // generateEmailConfirmationTokenController,//needs adding 
+  // updateUserEmailController,//needs adding
+  // refreshTokenController,//needs adding
+  // updateUserBioController,//needs adding
+  // changeUserPasswordController,//needs adding
+  // resetPasswordController,//needs adding
+  // confirmEmailController,//needs adding
+  // searchUserByEmailController,//needs adding
+  // searchUserByUsernameController,//needs adding
+  // generateEmailConfirmationTokenController,//needs adding
 } = require("../Controllers/UsersController");
 
 const {
@@ -27,12 +26,12 @@ const {
   updateUserValidation,
   updateUserEmailValidation,
   changeUserPasswordValidation,
-  updateUserBioValidation
-} = require('../Validators/UserValidator');
+  updateUserBioValidation,
+} = require("../Validators/UserValidator");
 
 //GET ROUTES
 
-router.get("/user/:id", getUserByIdController); // Tested
+router.get("/user/:id", authToken, getUserByIdController); // Tested
 router.get("/users", getAllUsersController); // Tested
 // router.get("/user/search/email", searchUserByEmailController);
 // router.get("/user/search/username", searchUserByUsernameController);
@@ -49,8 +48,7 @@ router.post("/auth/login", authenticateUserController); // Tested
 // router.post("/user/confirm-email", confirmEmailController);
 
 //PUT ROUTES
-router.put("/user", authToken, updateUserController,
-  updateUserValidation); //Tested
+router.put("/user", authToken, updateUserController, updateUserValidation); //Tested
 // router.put("/user/changeEmail/:id", updateUserEmailController,
 //   updateUserEmailValidation());
 // router.put("/user/bio/:id", updateUserBioController,
