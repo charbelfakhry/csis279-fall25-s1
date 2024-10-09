@@ -9,7 +9,7 @@ const {
 
 const usersController = {
   getUserByIdController: async (req, res) => {
-    const  user_id  = req.params.id;
+    const user_id = req.params.id;
     console.log(req.params.id);
     try {
       if (!user_id) return res.status(400).json({ message: "Missing user id" });
@@ -54,17 +54,20 @@ const usersController = {
       );
 
       if (!newUser) {
-        return res.status(500).json({ message: "Failed to create a new user." });
+        return res
+          .status(500)
+          .json({ message: "Failed to create a new user." });
       }
 
-      res.status(201).json({ message: 'New user created', user: newUser });
+      res.status(201).json({ message: "New user created", user: newUser });
     } catch (error) {
       res.status(500).json({ error: error?.message });
     }
   },
 
   updateUserController: async (req, res) => {
-    const { user_id, user_username, user_email, user_pass, user_phone } = req.body;
+    const { user_id, user_username, user_email, user_pass, user_phone } =
+      req.body;
 
     if (!user_id) {
       return res.status(400).json({ message: "Missing user id" });
@@ -83,14 +86,16 @@ const usersController = {
         return res.status(500).json({ message: "Failed to update user." });
       }
 
-      res.status(200).json({ message: "User updated successfully", user: updatedUser });
+      res
+        .status(200)
+        .json({ message: "User updated successfully", user: updatedUser });
     } catch (error) {
       res.status(500).json({ error: error?.message });
     }
   },
 
   deleteUserController: async (req, res) => {
-    const { user_id } = req.body;
+    const user_id = req.params.id;
 
     if (!user_id) {
       return res.status(400).json({ message: "Missing user id" });
@@ -103,11 +108,13 @@ const usersController = {
         return res.status(500).json({ message: "Failed to delete user." });
       }
 
-      res.status(200).json({ message: "User deleted successfully"});
+      res.status(200).json({ message: "User deleted successfully" });
     } catch (error) {
-      res.status(500).json({ message: `Error in deleting the user ${error.message}` });
+      res
+        .status(500)
+        .json({ message: `Error in deleting the user ${error.message}` });
     }
   },
 };
 
-module.exports = usersController
+module.exports = usersController;

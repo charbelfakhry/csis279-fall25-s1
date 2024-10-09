@@ -23,6 +23,21 @@ const Users = () => {
         }
     }
 
+    const deleteUser = async (user_id) => {
+        try {
+            const URL = `http://localhost:4000/api/users/user/${user_id}`;
+            const res = await axios.delete(URL);
+            if (res.status === 200) {
+                alert('User deleted successfully');
+                getUsers();
+            } else {
+                alert('Failed to delete user');
+            }
+    }catch(e){
+        console.error('Failed to delete user', e);
+    }
+}
+
     return(
         <>
             <table className="table">
@@ -33,6 +48,7 @@ const Users = () => {
                         <th>PHONE</th>
                         <th>EMAIL</th>
                     </tr>
+                    <button onClick={getUsers}>Refresh</button>
                 </thead>
                 <tbody>
                     {
@@ -49,6 +65,9 @@ const Users = () => {
                                 </td>
                                 <td>
                                     {user.user_email}
+                                </td>
+                                <td>
+                                    <button className="text-danger" onClick={() => deleteUser(user.user_id)}>DELETE</button> 
                                 </td>
                             </tr>
                         ))

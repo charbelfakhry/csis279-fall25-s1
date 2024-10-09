@@ -57,6 +57,6 @@ router.put("/user", authToken, updateUserController, updateUserValidation); //Te
 //   changeUserPasswordValidation());
 
 //DELTE ROUTES
-router.delete("/user", authToken, deleteUserController);
+router.delete("/user/:id", deleteUserController); //removed auth for testing
 
 module.exports = router;
