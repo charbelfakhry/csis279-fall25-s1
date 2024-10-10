@@ -48,7 +48,7 @@ router.post("/auth/login", authenticateUserController); // Tested
 // router.post("/user/confirm-email", confirmEmailController);
 
 //PUT ROUTES
-router.put("/user", authToken, updateUserController, updateUserValidation); //Tested
+router.put("/user/:id", updateUserController, updateUserValidation); //Tested, token removed for testing
 // router.put("/user/changeEmail/:id", updateUserEmailController,
 //   updateUserEmailValidation());
 // router.put("/user/bio/:id", updateUserBioController,

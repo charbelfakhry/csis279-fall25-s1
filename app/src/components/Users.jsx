@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Users = () => {
+    const [selectedUser, setSelectedUser] = useState(null);
     const [users, setUsers] = useState([]);
     useEffect(() => {
         getUsers();
@@ -20,6 +21,28 @@ const Users = () => {
             }
         } catch (e) {
             console.error('failed to fetch users', e);
+        }
+    }
+
+    const handleUpdate = async(user) => {
+        setSelectedUser(user);
+        try{
+
+            const URL = `http://localhost:4000/api/users/user/${user.user_id}`;
+            const res = await axios.put(URL, {
+                user_username: user.user_username,
+                user_email: user.user_email,
+                user_phone: user.user_phone
+            });
+            
+            if (res.status === 200) {
+                alert('User updated successfully');
+                getUsers();
+            } else {
+                alert('Failed to update user');
+            }
+        }catch(e){
+            console.error('Failed to update user', e);
         }
     }
 
@@ -67,7 +90,8 @@ const Users = () => {
                                     {user.user_email}
                                 </td>
                                 <td>
-                                    <button className="text-danger" onClick={() => deleteUser(user.user_id)}>DELETE</button> 
+                                    <button className="text-danger" class="btn btn-outline-danger" onClick={() => deleteUser(user.user_id)}>DELETE</button>
+                                    <button className="text-warning" onClick={()=>handleUpdate(user)}>Update</button>
                                 </td>
                             </tr>
                         ))
