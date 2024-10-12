@@ -1,13 +1,27 @@
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap CSS is imported
 
+/**
+ * InputForm Component
+ *
+ * A form for capturing user input details such as user ID, username, phone number, and email.
+ * The form updates the parent component's state with new user data when submitted.
+ *
+ * @component
+ * @param {Object} props - The component's props.
+ * @param {function} props.setNewData - Function to update the parent component's state with new data.
+ *
+ * @returns {JSX.Element} - Rendered InputForm component.
+ */
 const InputForm = ({ setNewData }) => {
-    const [userId, setUserId] = useState('');
-    const [userName, setUserName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
+    const [userId, setUserId] = useState('');        // State to store user ID
+    const [userName, setUserName] = useState('');    // State to store username
+    const [phoneNumber, setPhoneNumber] = useState(''); // State to store phone number
+    const [email, setEmail] = useState('');          // State to store email
 
-
+    /**
+     * Handles form submission by updating the parent component's state with the form data.
+     */
     const handleSubmit = () => {
         setNewData({
             user_id: userId,
@@ -69,6 +83,6 @@ const InputForm = ({ setNewData }) => {
             </button>
         </div>
     );
-}
+};
 
 export default InputForm;
