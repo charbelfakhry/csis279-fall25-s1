@@ -3,7 +3,7 @@ import axious from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ setIsLoggedIn }) => {// to pass the setIsLoggedIn function as a prop, set it in users.jsx slay
-    const [credientials, setCredientials] = useState({user_email: '', user_pass: ''});
+    const [credentials , setCredientials] = useState({user_email: '', user_pass: ''});
     const navigate = useNavigate();
 
     const handleInputChange = (e) => {
@@ -11,7 +11,7 @@ const Login = ({ setIsLoggedIn }) => {// to pass the setIsLoggedIn function as a
         /*so basically,
         -name is the name attribute of the input field (e.g., "user_email" or "user_pass")
         -value is the current value of the input field */
-        setCredientials({ ...credientials, [name]: value });
+        setCredientials({ ...credentials, [name]: value });
         /* so the "..."  spreads all existing properties of the credentials object into the new object. then
         name becomes whatever the name attribute of the input field is, and value becomes the current value of the input field 
         aka user_email: "user@example.com" */
@@ -22,7 +22,7 @@ const Login = ({ setIsLoggedIn }) => {// to pass the setIsLoggedIn function as a
         e.preventDefault();
         try{
             const URL = 'http://localhost:4000/api/auth/login'
-            const res = await axious.post(URL, credientials);
+            const res = await axious.post(URL, credentials);
             if(res.data.token && res.status === 200){
                 localStorage.setItem('token', res.data.token);
                 setIsLoggedIn(true);
