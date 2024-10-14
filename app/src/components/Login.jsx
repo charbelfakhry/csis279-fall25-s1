@@ -1,77 +1,56 @@
-import React, { useState } from "react";
-import axious from "axios";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {RiUserFill, RiLockPasswordFill} from 'react-icons/ri';
+import { toast } from "react-toastify";
+import UserService from "../services/UserService";
 
-const Login = ({ setIsLoggedIn }) => {// to pass the setIsLoggedIn function as a prop, set it in users.jsx slay
-    const [credentials , setCredientials] = useState({user_email: '', user_pass: ''});
-    const navigate = useNavigate();
+const Login = ({ onLogin }) => {
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;// destructuring the name andvalue w osas :O
-        /*so basically,
-        -name is the name attribute of the input field (e.g., "user_email" or "user_pass")
-        -value is the current value of the input field */
-        setCredientials({ ...credentials, [name]: value });
-        /* so the "..."  spreads all existing properties of the credentials object into the new object. then
-        name becomes whatever the name attribute of the input field is, and value becomes the current value of the input field 
-        aka user_email: "user@example.com" */
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    };
 
-    const handleSubmit= async(e) => {
-        e.preventDefault();
-        try{
-            const URL = 'http://localhost:4000/api/auth/login'
-            const res = await axious.post(URL, credentials);
-            if(res.data.token && res.status === 200){
-                localStorage.setItem('token', res.data.token);
-                setIsLoggedIn(true);
-                navigate('/users');
-                /*If successful and a token is received:
-
-                -Stores the token in localStorage for persistent auth state.
-                -Calls setIsLoggedIn(true) to update the app's authentication state.
-                -Navigates to the '/users' route.
-                */
+    const handleLogin = async() =>{
+        if(username !== '' && password !== ''){
+            const result = await UserService.authenticate({email: username,pass: password});
+            if(result?.data === "Unauthenticated"){
+                toast.error("WRONG USERNAME/PASSWORD");
+                reset();
+            }else{
+                //local storage
+                const authenticatedUser = result?.data?.user;
+                localStorage.setItem("user", JSON.stringify(authenticatedUser));
+                localStorage.setItem("token", JSON.stringify(result?.data.token));
+                // onLogin();
             }
-
-        }catch(e){
-            console.error('Failed to login', e);
-            alert('Failed to login, check your creds');
         }
-        
     }
-    return (
-        <div className="container mt-5">
-            <h2 className="text-center mb-4">Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        name="user_email"
-                        value={credentials.user_email}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        name="user_pass"
-                        value={credentials.user_pass}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">Login</button>
-            </form>
+
+    const reset = () => {
+        setUsername("");
+        setPassword("");
+    }
+
+    return(
+        <>
+        <div className="login-container">
+            <h2>Login</h2>
+            <hr style={{color: "#333", borderStyle: "dotted"}}/>
+            <div>
+                <RiUserFill className="input-icon" />
+                <input type="text" placeholder="Username" value={username} onChange={(e)=>setUsername(e.target.value)} />
+            </div>
+            <hr style={{color: "#333", borderStyle: "dotted"}}/>
+            <div>
+                <RiLockPasswordFill className="input-icon" />
+                <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+            </div>
+            <hr style={{color: "#333", borderStyle: "dotted"}}/>
+            <button className="btn btn-sm text-light fw-bold" style={{backgroundColor: "#3498db"}} onClick={handleLogin}>
+                Login
+            </button>
         </div>
-    );
-    
+        </>
+    )
 }
+
+export default Login;
