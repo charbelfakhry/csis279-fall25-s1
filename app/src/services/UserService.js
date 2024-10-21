@@ -3,7 +3,7 @@ import { getToken, getTokenBearer } from "../utils/Utils";
 
 
 const getAll = () => {
-    return http.get("/users/users", {
+    return http.get("/users", {
         headers: {
             Authorization: `Bearer ${getToken()}`
         }
@@ -11,7 +11,7 @@ const getAll = () => {
 }
 
 const get = (id) =>{
-    return http.get(`/users/user/${id}`, {
+    return http.get(`/users/${id}`, {
         headers: {
             Authorization: getTokenBearer()
         }
@@ -19,17 +19,23 @@ const get = (id) =>{
 }
 
 const create = (data) =>{
-    return http.post(`/users/insertUser`, data);
+    return http.post(`/users`, data);
 }
 
 const update = (data) => {
-    return http.post(`/users/updateUser`, data);
+    return http.put(`/users`, data, {
+        headers: {
+            Authorization: getTokenBearer()
+        }
+    });
 }
 
 const remove = (id) =>{
-    console.log(id);
-    return http.post(`/users/deleteUser`, {id});
-    //return http.delete(`/users/deleteUser/${id}`);
+    return http.delete(`/users/${id}`, {
+        headers: {
+            Authorization: getTokenBearer()
+        }
+    });
 }
 
 const authenticate = (user) => {

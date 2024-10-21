@@ -6,6 +6,8 @@ require("dotenv").config();
 const userAuthController = async (req, res) => {
   const { email, pass } = req.body;
 
+  console.log(email, pass);
+
   if(!email || !pass) {
     return res.status(400).json({ message: "missing email or pass" });
   }

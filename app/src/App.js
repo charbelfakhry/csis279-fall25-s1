@@ -16,10 +16,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const user = getUser();
-    if (user) {
-      setIsLoggedIn(true);
-    }
+    
   }, []);
 
   const handleLogin = () => {
@@ -44,7 +41,9 @@ function App() {
 
   const isAdmin = () => {
     const user = getUser();
-    return user?.role === "admin";
+    // we should implement is Admin later
+    //return user?.role === "admin";
+    return true;
   };
 
   return (
@@ -58,7 +57,7 @@ function App() {
           >
             <div className="container">
               <Link to="/" className="navbar-brand text-light">
-                CSIS 279 S.1 <span>{"</>"}&#60;/&#62;</span>
+                CSIS 279 S.1
               </Link>
               <button
                 className="navbar-toggler"
@@ -125,7 +124,10 @@ function App() {
               <Route path="/userForm" element={<UserForm />} />
             </>
           ) : (
+            <>
             <Route path="/" element={<Login onLogin={handleLogin} />} />
+            <Route path="/aboutus" element={<AboutUs />} />
+            </>
           )}
         </Routes>
         <ToastContainer />

@@ -35,10 +35,7 @@ const getAllUsers = async () => {
 const getUserById = async (id) => {
     try {
         const user = await User.findByPk(id);
-        if (user) {
-            return user.toJSON();
-        }
-        return "User not found";
+        return user;
     } catch (error) {
         console.error('Error retrieving user by ID:', error);
         throw new Error('Failed to retrieve user');

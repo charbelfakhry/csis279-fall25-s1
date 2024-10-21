@@ -12,7 +12,7 @@ const Login = ({ onLogin }) => {
     const handleLogin = async() =>{
         if(username !== '' && password !== ''){
             const result = await UserService.authenticate({email: username,pass: password});
-            if(result?.data === "Unauthenticated"){
+            if(result?.status !== 200){
                 toast.error("WRONG USERNAME/PASSWORD");
                 reset();
             }else{
@@ -20,7 +20,7 @@ const Login = ({ onLogin }) => {
                 const authenticatedUser = result?.data?.user;
                 localStorage.setItem("user", JSON.stringify(authenticatedUser));
                 localStorage.setItem("token", JSON.stringify(result?.data.token));
-                // onLogin();
+                 onLogin();
             }
         }
     }

@@ -6,7 +6,6 @@ const getToken = () => {
 
 const getTokenBearer = () => {
   const token = getToken();
-  console.log(token);
   return `Bearer ${token}`;
 }
 

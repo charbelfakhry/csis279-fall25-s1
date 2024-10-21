@@ -30,33 +30,19 @@ const {
 } = require("../Validators/UserValidator");
 
 //GET ROUTES
+router.get("/:id", authToken, getUserByIdController); // Tested
+router.get("/", authToken, getAllUsersController); // Tested
 
-router.get("/user/:id", authToken, getUserByIdController); // Tested
-router.get("/users", authToken, getAllUsersController); // Tested
-// router.get("/user/search/email", searchUserByEmailController);
-// router.get("/user/search/username", searchUserByUsernameController);
 
 //POST ROUTES
-router.post("/user", authToken ,createUserController, insertUserValidation); //Tested
+router.post("/" ,createUserController, insertUserValidation); //Tested
 router.post("/auth/login", authenticateUserController); // Tested
-// router.post("/auth/refresh-token", refreshTokenController);
-// router.post("/user/reset-password", resetPasswordController);
-// router.post(
-//   "/user/confirmation-token/:userId",
-//   generateEmailConfirmationTokenController
-// );
-// router.post("/user/confirm-email", confirmEmailController);
+
 
 //PUT ROUTES
-router.put("/user", authToken, updateUserController, updateUserValidation); //Tested
-// router.put("/user/changeEmail/:id", updateUserEmailController,
-//   updateUserEmailValidation());
-// router.put("/user/bio/:id", updateUserBioController,
-//   updateUserBioValidation());
-// router.put("/user/change-password/:id", changeUserPasswordController,
-//   changeUserPasswordValidation());
+router.put("/", authToken, updateUserController, updateUserValidation); //Tested
 
 //DELTE ROUTES
-router.delete("/user/:id", authToken , deleteUserController); 
+router.delete("/:id", authToken , deleteUserController); 
 
 module.exports = router;

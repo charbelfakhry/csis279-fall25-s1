@@ -4,11 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const UserForm = (user) => {
-    const [id, setId] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
+    const [id, setId] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
 
@@ -25,12 +24,12 @@ const UserForm = (user) => {
         }
     }, [location]);
 
+
     const assignPerson = (person) => {
-        setId(person?.id);
-        setFirstName(person?.firstName);
-        setLastName(person?.lastName);
-        setEmail(person?.email);
-        setPhone(person?.phone);
+        setId(person?.user_id);
+        setUsername(person?.user_username);
+        setEmail(person?.user_email);
+        setPhone(person?.user_phone);
     };
 
     const handleSubmit = async (event) => {
@@ -38,9 +37,13 @@ const UserForm = (user) => {
         let result;
         try {
             if (id) {
-                result = await UserService.update({ user: { id, firstName, lastName, email, phone } });
+                result = await UserService.update(
+                    { user_id: id, user_username: username, user_email: email, user_phone: phone }
+                );
             } else {
-                result = await UserService.create({ user: { firstName, lastName, email, phone } });
+                result = await UserService.create(
+                    { user_username: username, user_email: email, user_pass: '123', user_phone: phone }
+                );
             }
             toast.success(result?.data?.message);
             navigate('/users'); // Replaced history.push with navigate
@@ -51,8 +54,7 @@ const UserForm = (user) => {
 
     const handleReset = () => {
         setId('');
-        setFirstName('');
-        setLastName('');
+        setUsername('');
         setEmail('');
         setPhone('');
     };
@@ -99,15 +101,9 @@ const UserForm = (user) => {
             <h2>User Form</h2>
             <form>
                 <div className="form-group row p-4">
-                    <label htmlFor='name' className='col-sm-2 col-form-label'>First Name</label>
+                    <label htmlFor='name' className='col-sm-2 col-form-label'>User Name</label>
                     <div className="col-sm-10">
-                        <input className="form-control" value={firstName} type="text" id="name" onChange={(e) => setFirstName(e.target.value)} />
-                    </div>
-                </div>
-                <div className="form-group row p-4">
-                    <label htmlFor='name' className='col-sm-2 col-form-label'>Last Name</label>
-                    <div className="col-sm-10">
-                        <input className="form-control" type="text" value={lastName} id="name" onChange={(e) => setLastName(e.target.value)} />
+                        <input className="form-control" value={username} type="text" id="name" onChange={(e) => setUsername(e.target.value)} />
                     </div>
                 </div>
                 <div className='form-group row p-4'>

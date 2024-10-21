@@ -66,7 +66,7 @@ const usersController = {
   },
 
   updateUserController: async (req, res) => {
-    const { user_id, user_username, user_email, user_pass, user_phone } =
+    const { user_id, user_username, user_email, user_phone } =
       req.body;
 
     if (!user_id) {
@@ -78,7 +78,6 @@ const usersController = {
         user_id,
         user_username,
         user_email,
-        user_pass,
         user_phone
       );
 
