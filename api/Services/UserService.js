@@ -24,7 +24,8 @@ const createUser = async (username, email, password, phone) => {
 
 const getAllUsers = async () => {
     try {
-        const users = await User.findAll();
+        const users = await User.findAll({attributes: [['user_id', "ID"], ['user_email', 'Email'], ['user_username', 'Username'], ['user_phone', 'Phone']]}
+        );
         return users;
     } catch (error) {
         console.error('Error retrieving users:', error);
