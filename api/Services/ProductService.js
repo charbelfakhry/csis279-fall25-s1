@@ -1,5 +1,4 @@
-import Product from "../Models/Product";
-
+const Product = require('../Models/Product');
 const createProduct = async (name, price, quantity, categoryId) => {
     try {
         const newProduct = await Product.create({
@@ -75,10 +74,10 @@ const deleteProduct = async (id) => {
     }
 };
 
-export default {
+module.exports = {
     createProduct,
     getAllProducts,
     getProductById,
     updateProduct,
     deleteProduct,
-};
+}

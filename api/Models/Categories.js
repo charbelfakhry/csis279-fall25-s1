@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/configSqlz');
+const sequelize = require('../Conifg/DBConfig');
 
 const Category = sequelize.define('Category', {
     category_id: {
@@ -15,6 +15,8 @@ const Category = sequelize.define('Category', {
 }, {
     tableName: 'categories',
     timestamps: true,
+    createdAt : false,
+    updatedAt : false
 });
 
 Category.associate = (models) => {

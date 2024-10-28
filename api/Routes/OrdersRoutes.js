@@ -1,33 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  getAllOrdersController,
-  getOrderByIdController,
-  createNewOrderController,
-  updateOrderController,
-  deleteOrderController,
-  getOrderItemsController,
-  addOrderItemController,
-  getOrdersByUserIdController,
-} = require("../Controllers/OrdersController");
+const orderController = require("../Controllers/OrdersController");
 
 const { orderValidation } = require("../Validators/OrderValidator");
 
 // GET ROUTES
-router.get("/orders", getAllOrdersController);
-router.get("/orders/:id", getOrderByIdController);
-router.get("/orders/:id/items", getOrderItemsController);
-router.get("/orders/user/:userId", getOrdersByUserIdController);
+router.get("/orders", orderController.getAllOrders);
+router.get("/orders/userId/:user_id", orderController.getOrderById);
+// router.get("/orders/:id/items", getOrderItemsController); 
+
 
 // POST ROUTES
-router.post("/orders", createNewOrderController, orderValidation());
-router.post("/orders/:id/items", addOrderItemController);
+router.post("/order", orderController.createOrder, orderValidation);
+
 
 // PUT ROUTES
-router.put("/orders/:id", updateOrderController, orderValidation());
+// router.put("/orders/:id", updateOrderController, orderValidation());
 
 // DELETE ROUTES
-router.delete("/orders/:id", deleteOrderController);
+router.delete("/orders/:id", orderController.deleteOrder);
 
 module.exports = router;

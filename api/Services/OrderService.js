@@ -1,4 +1,4 @@
-const { Order } = require("../Models/Order");
+const Order = require("../Models/Order");
 
 // Get all orders
 const getOrders = async () => {
@@ -29,17 +29,19 @@ const getOrderById = async (user_id) => {
 
 // Add an order
 const addOrder = async (
-  userId,
+  order_paymnt_method,
   order_shipping_address,
   order_total,
-  made_on
+  made_on,
+  user_id
 ) => {
   try {
     return await Order.create({
-      user_id: userId,
+      order_paymnt_method: order_paymnt_method,
       order_shipping_address: order_shipping_address,
       order_total: order_total,
       made_on: new Date(),
+      user_id: user_id
     });
   } catch (error) {
     console.error(`Error in creating a new order `, error);

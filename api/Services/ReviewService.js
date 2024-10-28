@@ -1,4 +1,4 @@
-const { Review } = require('../Models/Review');
+const  Review  = require('../Models/Review');
 
 // Get all Reviews
 const getReviews = async () => {
@@ -25,9 +25,9 @@ const getReviewById = async (review_id) => {
 };
 
 // Add a Review
-const addReview = async (review_id, review_body) => {
+const addReview = async ( review_body) => {
   try {
-    return await Review.create({ review_id: review_id, review_body: review_body });
+    return await Review.create({review_body: review_body });
   } catch (error) {
     console.error("Error adding new review:", error);
     throw error;
@@ -54,3 +54,4 @@ module.exports = {
   addReview,
   deleteReview,
 };
+

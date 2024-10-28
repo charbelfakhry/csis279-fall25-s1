@@ -1,4 +1,7 @@
-const orderItemService = require("../Services/OrderItemService");
+const { getOrderItem,
+  getOrderItemById,
+  addOrderItem,
+  deleteOrderItem, } = require("../Services/OrderItemService");
 
 const orderItemController = {
   createOrderItem: async (req, res) => {
@@ -11,7 +14,7 @@ const orderItemController = {
           .json({ message: "User ID, Product ID are required" });
       }
 
-      const orderItem = await orderItemService.createOrderItem(
+      const orderItem = await addOrderItem(
         userId,
         productId
       );
@@ -24,7 +27,7 @@ const orderItemController = {
   getAllItemsByOrderId: async (req, res) => {
     try {
       const { orderId } = req.params;
-      const orderItems = await orderItemService.getAllItemsByOrderId(orderId);
+      const orderItems = await getAllItemsByOrderId(orderId);
 
       if (orderItems.length === 0) {
         return res
@@ -39,10 +42,10 @@ const orderItemController = {
   },
 
   getOrderItemById: async (req, res) => {
-    
+
     try {
       const { orderItemId } = req.params;
-      const orderItem = await orderItemService.getOrderItemById(orderItemId);
+      const orderItem = await getOrderItemById(orderItemId);
       if (!orderItem) {
         return res.status(404).json({ message: "Order item not found" });
       }
@@ -57,7 +60,7 @@ const orderItemController = {
       const { orderItemId } = req.params;
       const { quantity, price } = req.body;
 
-      const [updatedCount] = await orderItemService.updateOrderItem(
+      const [updatedCount] = await updateOrderItem(
         orderItemId,
         quantity,
         price
@@ -77,7 +80,7 @@ const orderItemController = {
   deleteOrderItem: async (req, res) => {
     try {
       const { orderItemId } = req.params;
-      const deleted = await orderItemService.deleteOrderItem(orderItemId);
+      const deleted = await deleteOrderItem(orderItemId);
 
       if (!deleted) {
         return res.status(404).json({ message: "Order item not found" });

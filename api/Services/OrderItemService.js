@@ -1,5 +1,5 @@
 const { OrderItem } = require('../Models/OrderItem');
-
+const Product = require('../Models/Product');
 // Get all OrderItem
 const getOrderItem = async () => {
     try {
