@@ -1,17 +1,20 @@
-const reviewService = require("../Services/ReviewService");
+const { getReviews,
+  getReviewById,
+  addReview,
+  deleteReview, } = require("../Services/ReviewService");
 
 const reviewController = {
   createReview: async (req, res) => {
     try {
-      const { review_id, review_body } = req.body;
+      const { review_body } = req.body;
 
-      if (!review_id || !review_body) {
+      if (!review_body) {
         return res
           .status(400)
-          .json({ message: "Review ID and review body are required" });
+          .json({ message: "review body is required" });
       }
 
-      const review = await reviewService.addReview(review_id, review_body);
+      const review = await addReview(review_body);
       res.status(201).json(review);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -20,7 +23,7 @@ const reviewController = {
 
   getAllReviews: async (req, res) => {
     try {
-      const reviews = await reviewService.getReviews();
+      const reviews = await getReviews();
       res.status(200).json(reviews);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -30,7 +33,7 @@ const reviewController = {
   getReviewById: async (req, res) => {
     try {
       const { reviewId } = req.params;
-      const review = await reviewService.getReviewById(reviewId);
+      const review = await getReviewById(reviewId);
       if (!review) {
         return res.status(404).json({ message: "Review not found" });
       }
@@ -43,7 +46,7 @@ const reviewController = {
   deleteReview: async (req, res) => {
     try {
       const { reviewId } = req.params;
-      const deleted = await reviewService.deleteReview(reviewId);
+      const deleted = await deleteReview(reviewId);
 
       if (!deleted) {
         return res.status(404).json({ message: "Review not found" });

@@ -1,17 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  getAllProductsController,
-  getProductByIdController,
-  createNewProductController,
-  updateProductController,
-  deleteProductControlelr,
-  getProductByGetegoryController,
-  getProductReviewsController,
-  getProductsBasedOnReviews,
-  searchForProductsController,
-} = require("../Controllers/ProductController");
+const productController = require("../Controllers/ProductController");
 
 const {
   insertProductValidation,
@@ -19,17 +9,20 @@ const {
 } = require("../Validators/ProductValidator");
 
 // GET ROUTES
-router.get("/products", getAllProductsController);
-router.get("/product/:id", getProductByIdController);
-router.get("/products/category/:categoryId", getProductByGetegoryController);
-router.get("/product/:id/reviews", getProductReviewsController);
-router.get("/products/top-rated", getProductsBasedOnReviews);
-router.get("/products/search", searchForProductsController);
+router.get("/products", productController.getAllProducts);
+router.get("/product/:productId", productController.getProductById);
+// router.get("/products/category/:categoryId", getProductByGetegoryController);
+// router.get("/product/:id/reviews", getProductReviewsController);
+// router.get("/products/top-rated", getProductsBasedOnReviews);
+// router.get("/products/search", searchForProductsController);
 
-router.post("/product", createNewProductController, insertProductValidation());
+router.post("/product", productController.createProduct, insertProductValidation);
 
 // PUT ROUTES
-router.put("/product/:id", updateProductController, updateprodcutValidation());
+router.put("/product/:productId", productController.updateProduct, updateprodcutValidation);
 
 // DELETE ROUTES
-router.delete("/product/:id", deleteProductControlelr);
+router.delete("/product/:productId", productController.deleteProduct);
+
+
+module.exports = router;

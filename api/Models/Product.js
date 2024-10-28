@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/configSqlz";
+const { DataTypes } = require('sequelize');
+const sequelize = require('../Conifg/DBConfig');
 
 const Product = sequelize.define('Product', {
     product_id: {
@@ -31,6 +31,9 @@ const Product = sequelize.define('Product', {
 }, {
     tableName: "products",
     timestamps: true,
+    createdAt : false,
+    updatedAt : false
 });
 
-export default Product;
+module.exports = Product;
+

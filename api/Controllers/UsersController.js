@@ -66,8 +66,10 @@ const usersController = {
   },
 
   updateUserController: async (req, res) => {
-    const { user_id, user_username, user_email, user_phone } =
+    const { user_username, user_email, user_pass, user_phone } =
       req.body;
+      
+    const user_id = req.params.id;
 
     if (!user_id) {
       return res.status(400).json({ message: "Missing user id" });
@@ -78,6 +80,7 @@ const usersController = {
         user_id,
         user_username,
         user_email,
+        user_pass,
         user_phone
       );
 

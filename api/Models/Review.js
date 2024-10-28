@@ -1,21 +1,22 @@
-module.exports = (sequelize, DataTypes) => {
-    const Review = sequelize.define('Review', {
-      rating: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          min: 1,
-          max: 5,
-        },
-      },
-      comment: DataTypes.TEXT,
-    });
-  
-    Review.associate = (models) => {
-      Review.belongsTo(models.User, { foreignKey: 'user_id' });
-      Review.belongsTo(models.Product, { foreignKey: 'product_id' });
-    };
-  
-    return Review;
-  };
-  
+
+const { DataTypes } = require('sequelize');
+const sequelize = require('../Conifg/DBConfig');
+
+const Review = sequelize.define('Review', {
+  review_id: {
+    primaryKey: true,
+    type: DataTypes.INTEGER,
+    autoIncrement: true
+  },
+  review_body: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+
+}, {
+  tableName: 'reviews',
+  timestamps: false
+});
+
+
+module.exports = Review;

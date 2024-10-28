@@ -1,4 +1,4 @@
-const {check} = require('express-validaor');
+const {check} = require('express-validator');
 
 const insertProductValidation = [
     check('product-name').notEmpty().withMessage('Product Name is required').custom(async (value) => {

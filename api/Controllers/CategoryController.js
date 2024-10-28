@@ -1,4 +1,8 @@
-const categoryService = require("../Services/CategoriesService");
+const { createCategory,
+  getAllCategories,
+  getCategoryById,
+  updateCategory,
+  deleteCategory, } = require("../Services/CategoriesService");
 
 const categoryController = {
   createCategory: async (req, res) => {
@@ -9,7 +13,7 @@ const categoryController = {
         return res.status(400).json({ message: "Category name is required" });
       }
 
-      const category = await categoryService.createCategory(name);
+      const category = await createCategory(name);
       res.status(201).json(category);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -18,7 +22,7 @@ const categoryController = {
 
   getAllCategories: async (req, res) => {
     try {
-      const categories = await categoryService.getAllCategories();
+      const categories = await getAllCategories();
       res.status(200).json(categories);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -28,7 +32,7 @@ const categoryController = {
   getCategoryById: async (req, res) => {
     try {
       const { categoryId } = req.params;
-      const category = await categoryService.getCategoryById(categoryId);
+      const category = await getCategoryById(categoryId);
       if (!category) {
         return res.status(404).json({ message: "Category not found" });
       }
@@ -43,7 +47,7 @@ const categoryController = {
       const { categoryId } = req.params;
       const { name } = req.body;
 
-      const [updatedCount] = await categoryService.updateCategory(
+      const [updatedCount] = await updateCategory(
         categoryId,
         name
       );
@@ -62,7 +66,7 @@ const categoryController = {
   deleteCategory: async (req, res) => {
     try {
       const { categoryId } = req.params;
-      const deleted = await categoryService.deleteCategory(categoryId);
+      const deleted = await deleteCategory(categoryId);
 
       if (!deleted) {
         return res.status(404).json({ message: "Category not found" });
