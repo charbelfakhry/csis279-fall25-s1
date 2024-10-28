@@ -1,0 +1,55 @@
+/* Main container for the data grid */
+.data-grid {
+    width: 100%; /* Full-width for responsive layout */
+    margin: 20px auto; /* Center the grid with top/bottom margin */
+    font-family: Arial, sans-serif; /* Use a clean, readable font */
+}
+
+/* Styling for the search input field above the table */
+.data-grid__search {
+    width: 100%; /* Full-width to match the grid */
+    padding: 8px; /* Padding for comfortable typing */
+    margin-bottom: 10px; /* Space below search bar before table */
+    font-size: 16px; /* Slightly larger font for readability */
+}
+
+/* Table styling for grid data */
+.data-grid__table {
+    width: 100%; /* Full-width table to match container */
+    border-collapse: collapse; /* Remove gaps between cells */
+}
+
+/* Base styling for table header and data cells */
+.data-grid__header-cell,
+.data-grid__cell {
+    padding: 10px; /* Padding inside cells for spacing */
+    border: 1px solid #ddd; /* Light border for separating cells */
+    text-align: left; /* Align text to the left in all cells */
+}
+
+/* Specific styling for header cells */
+.data-grid__header-cell {
+    cursor: pointer; /* Make header clickable (for sorting) */
+    background-color: #f2f2f2; /* Light gray background for headers */
+    font-weight: bold; /* Bold text to distinguish headers */
+}
+
+/* Hover effect for header cells to indicate interactivity */
+.data-grid__header-cell:hover {
+    background-color: #e0e0e0; /* Darker gray on hover */
+}
+
+/* Pagination container styling */
+.data-grid__pagination {
+    display: flex; /* Arrange pagination items horizontally */
+    justify-content: space-between; /* Space pagination controls apart */
+    align-items: center; /* Center pagination controls vertically */
+    padding: 10px; /* Padding around pagination controls */
+}
+
+/* Styling for pagination buttons */
+.data-grid__pagination button {
+    padding: 5px 10px; /* Padding for button size */
+    font-size: 16px; /* Font size for readability */
+    cursor: pointer; /* Pointer cursor for interactivity */
+}

@@ -9,6 +9,8 @@ import DateTimeLabel from "./utils/DateTimeLabel";
 import { FiLogOut, FiEdit } from "react-icons/fi";
 import AboutUs from "./pages/AboutUs";
 import Login from "./components/Login";
+import UsersDataGrid from "./components/UsersDataGrid";
+import ProductsDataGrid from "./components/ProductsDataGrid";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -79,11 +81,23 @@ function App() {
               >
                 <ul className="navbar-nav ms-auto">
                   {isAdmin() && (
+                    <>
                     <li className="nav-item">
                       <Link to="/users" className="nav-link text-light">
                         Users
                       </Link>
                     </li>
+                    <li className="nav-item">
+                      <Link to="/usersDatagrid" className="nav-link text-light">
+                        Users Datagrid
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/products" className="nav-link text-light">
+                        Products
+                      </Link>
+                    </li>
+                    </>
                   )}
                   <li className="nav-item dropdown">
                     <button
@@ -122,6 +136,8 @@ function App() {
             <>
               {isAdmin() && <Route path="/users" element={<UserPage />} />}
               <Route path="/userForm" element={<UserForm />} />
+              <Route path="/usersDatagrid" element={<UsersDataGrid />} />
+              <Route path="/products" element={<ProductsDataGrid />} />
             </>
           ) : (
             <>
